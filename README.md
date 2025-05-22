@@ -9,6 +9,7 @@
    ```
 3. Clone the project into the workspace:
    ```
+   mkdir src
    cd src
    git clone https://github.com/linguanliang/gczb.git
    ```
