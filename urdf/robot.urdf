@@ -1,0 +1,36 @@
+<robot name="gczb_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- 添加一个虚拟的根链接 -->
+  <link name="world"/>
+
+  <!-- base_link 作为虚拟根链接的子链接 -->
+  <joint name="world_to_base" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+    <origin xyz="-3.5 2.7 0" rpy="1.57 0 0"/>
+  </joint>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://gczb/meshes/module.STL" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://gczb/meshes/module.STL" scale="0.01 0.01 0.01"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+    </inertial>
+  </link>
+
+  <!-- 引入雷达插件 -->
+  <xacro:include filename="$(find gczb)/urdf/robot_laser.xacro"/>
+  <xacro:robot_laser/>
+</robot>

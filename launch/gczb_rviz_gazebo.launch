@@ -1,0 +1,20 @@
+<launch>
+    <!-- 加载机器人描述 -->
+    <param name="robot_description" command="$(find xacro)/xacro $(find gazebo_demo)/urdf/gczb_total.xacro" />
+    
+    <!-- 启动 gazebo -->
+    <!--
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="model://gczb" />
+    </include>
+
+    <node pkg="gazebo_ros" type="spawn_model" name="model" args="-urdf -model mycar_gczb -param robot_description" respawn="true" output="screen" />
+    -->
+
+    <!-- 启动 RViz 并加载 gczb.rviz 配置 -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find gazebo_demo)/config/gczb.rviz" />
+
+    <!-- 关节以及机器人状态发布节点 -->
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+</launch>

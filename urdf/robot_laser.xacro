@@ -1,0 +1,39 @@
+<robot name="my_sensors" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <!-- 雷达 -->
+  <xacro:macro name="robot_laser" params="">
+    <gazebo reference="base_link">
+      <sensor type="ray" name="rplidar">
+        <!-- 设置雷达位置，z=1m，保持与 xy 面平行 -->
+        <pose>3.4 2.7 3.05 1.57 0 0</pose>
+        <visualize>true</visualize>
+        <update_rate>5.5</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>360</samples>
+              <resolution>1</resolution>
+              <min_angle>-3</min_angle>
+              <max_angle>3</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.10</min>
+            <max>30.0</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </ray>
+        <plugin name="gazebo_rplidar" filename="libgazebo_ros_laser.so">
+          <topicName>/scan</topicName>
+          <frameName>base_link</frameName>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+
+</robot>
